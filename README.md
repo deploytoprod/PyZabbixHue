@@ -3,8 +3,6 @@ PyZabbixHue
 
 Getting Zabbix triggers on the most fashion way.
 
-It uses the
-
 Dependencies
 ------------
 
