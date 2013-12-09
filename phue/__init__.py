@@ -51,13 +51,10 @@ class PHue:
         self.resource = resource
 
     def pushgroup(self):
-        if not len(self.lastresource):
-            print "First run, huh"
-            self.bridge.group.update(self.resource)
-            self.lastresource = self.resource
-        elif self.lastresource == self.resource:
+        if self.lastresource == self.resource:
             print "I won't update the same thing to the bridge"
             return
         else:
             self.bridge.group.update(self.resource)
-            self.lastresource = self.resource
+
+        self.lastresource = self.resource
