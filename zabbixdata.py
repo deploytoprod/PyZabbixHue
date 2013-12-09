@@ -20,7 +20,8 @@ class ZabbixData:
                                               expandData='host',
                                               withLastEventUnacknowledged=1,
                                               sortfield='priority',
-                                              sortorder='DESC'
+                                              sortorder='DESC',
+                                              filter={'value': 1},
                                              )
 
     def getworsttrigger(self):
