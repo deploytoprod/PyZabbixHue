@@ -2,6 +2,8 @@
 from zabbixdata import *
 from phue import *
 
+phue = PHue()
+
 while True:
 
     zdata = ZabbixData()
@@ -9,7 +11,6 @@ while True:
     zdata.getworsttrigger()
     print zdata.worsttrigger
 
-    phue = PHue()
     phue.bootstrap()
     phue.updategroup(0,zdata.worsttrigger)
     phue.pushgroup()

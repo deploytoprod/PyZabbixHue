@@ -8,6 +8,7 @@ class PHue:
         phuebridgeip = Portal().get()['resource'][0]['internalipaddress']
         self.bridge = Bridge(device={'ip':phuebridgeip}, user={'name':bridgepasswd})
         self.resource = {}
+        self.lastresource = {}
 
     def bootstrap(self):
 
@@ -50,4 +51,13 @@ class PHue:
         self.resource = resource
 
     def pushgroup(self):
-        self.bridge.group.update(self.resource)
+        if not len(self.lastresource):
+            print "First run, huh"
+            self.bridge.group.update(self.resource)
+            self.lastresource = self.resource
+        elif self.lastresource == self.resource:
+            print "I won't update the same thing to the bridge"
+            return
+        else:
+            self.bridge.group.update(self.resource)
+            self.lastresource = self.resource
