@@ -11,3 +11,5 @@ def severity2color(sev):
         return configs.yellow
     if sev == 1 or sev == 0 or sev == -1:
         return configs.white
+    if sev == 6:
+        return configs.green

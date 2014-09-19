@@ -1,6 +1,6 @@
 from beautifulhue.api import *
 from configs import *
-from time import sleep
+from time import sleep, time
 from helpers import *
 
 class PHue:
@@ -9,6 +9,7 @@ class PHue:
         self.bridge = Bridge(device={'ip':phuebridgeip}, user={'name':bridgepasswd})
         self.resource = {}
         self.lastresource = {}
+	self.ts = self.nowts()
 
     def bootstrap(self):
 
@@ -19,7 +20,6 @@ class PHue:
             userexists = True
         else:
             userexists = False
-
 
         if not userexists:
             print "First run detected. Press the bridge button now and wait..."
@@ -58,3 +58,22 @@ class PHue:
             self.bridge.group.update(self.resource)
 
         self.lastresource = self.resource
+
+    def getts(self):
+        return self.ts
+
+    def setts(self,n):
+        self.ts = n
+
+    def nowts(self):
+        return time.time()
+
+    def imalive(self,currentlight):
+        if ( ( self.nowts() - self.getts()) > configs.flickingperiod):
+            print "Flicking green lamp!"
+            self.updategroup(0,6)
+	    self.pushgroup()
+	    sleep (1)
+	    self.updategroup(0,currentlight)
+	    self.pushgroup()
+	    self.setts(self.nowts())

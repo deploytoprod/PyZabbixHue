@@ -1,6 +1,6 @@
-
 from zabbixdata import *
 from phue import *
+import time
 
 phue = PHue()
 
@@ -12,7 +12,8 @@ while True:
     print zdata.worsttrigger
 
     phue.bootstrap()
+    phue.imalive(zdata.worsttrigger)
     phue.updategroup(0,zdata.worsttrigger)
     phue.pushgroup()
 
-    sleep(10)
+    sleep(60)
