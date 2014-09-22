@@ -1,15 +1,8 @@
-import configs
-import time
-import datetime
-
 def severity2color(sev):
-    if sev == 5:
-        return configs.red
-    if sev == 4:
-        return configs.orange
-    if sev == 3 or sev == 2:
-        return configs.yellow
-    if sev == 1 or sev == 0 or sev == -1:
-        return configs.white
-    if sev == 6:
-        return configs.green
+    red = [0.674,0.322]
+    orange = [0.700,0.400]
+    yellow = [0.700, 0.500]
+    white = [0.350,0.350]
+    green = [0.408,0.517]
+    sevMap = {5:red, 4:orange, 3:yellow, 2:yellow, 1:white, 0:white, -1:white, -2:green}
+    return sevMap[sev]
