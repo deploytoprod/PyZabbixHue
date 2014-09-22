@@ -1,6 +1,6 @@
 from beautifulhue.api import *
 from configs import *
-from time import sleep, time
+from time import time
 from helpers import *
 
 class PHue:
@@ -66,12 +66,12 @@ class PHue:
         self.ts = n
 
     def nowts(self):
-        return time.time()
+        return time()
 
     def imalive(self,currentlight):
-        if ( ( self.nowts() - self.getts()) > configs.flickingperiod):
+        if ( ( self.nowts() - self.getts()) > flickingperiod):
             print "Flicking green lamp!"
-            self.updategroup(0,6)
+            self.updategroup(0,-2)
 	    self.pushgroup()
 	    sleep (1)
 	    self.updategroup(0,currentlight)
