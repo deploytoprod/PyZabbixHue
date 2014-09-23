@@ -1,6 +1,6 @@
 from beautifulhue.api import *
 from configs import *
-from time import time
+from time import time, sleep
 from helpers import *
 
 class PHue:
